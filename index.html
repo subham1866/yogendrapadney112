@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Yogendra Pandey - Portfolio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background: radial-gradient(circle at center, #0f172a, #020617);
+      overflow-x: hidden;
+      color: white;
+      font-family: 'Helvetica Neue', sans-serif;
+      min-height: 100vh;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .glow {
+      animation: glow 4s ease-in-out infinite alternate;
+    }
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #38bdf8, 0 0 20px #0ea5e9; }
+      to { text-shadow: 0 0 20px #3b82f6, 0 0 40px #2563eb; }
+    }
+    .tilt {
+      transition: transform 0.2s ease;
+      will-change: transform;
+      transform-style: preserve-3d;
+      cursor: pointer;
+      background: rgba(15, 23, 42, 0.7);
+      backdrop-filter: blur(10px);
+      padding: 1.5rem;
+      border-radius: 1rem;
+      box-shadow: 0 0 15px #2563eb;
+    }
+    .tilt:hover {
+      transform: perspective(600px) rotateX(8deg) rotateY(8deg);
+      box-shadow: 0 0 25px #3b82f6;
+    }
+    a.project-link {
+      color: #60a5fa;
+      text-decoration: underline;
+      cursor: pointer;
+      font-weight: 600;
+    }
+    a.project-link:hover {
+      color: #3b82f6;
+    }
+    .hidden {
+      display: none;
+    }
+    .project-details {
+      margin-top: 2rem;
+      max-width: 700px;
+      background: rgba(59, 130, 246, 0.1);
+      backdrop-filter: blur(8px);
+      border-radius: 1rem;
+      padding: 1.5rem 2rem;
+      box-shadow: 0 0 20px #3b82f6;
+    }
+    .project-details img {
+      border-radius: 0.75rem;
+      margin-top: 1rem;
+      width: 100%;
+      box-shadow: 0 0 10px #2563eb;
+    }
+    footer {
+      margin-top: 3rem;
+      font-size: 0.875rem;
+      color: #93c5fd;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="mb-12 text-center">
+    <h1 id="tiltName" class="text-5xl font-bold glow select-none">
+      Yogendra Pandey
+    </h1>
+    <p class="text-blue-300 mt-2">Creative Web Designer | Gamer | Student</p>
+  </header>
+
+  <!-- Projects grid -->
+  <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full max-w-5xl">
+
+    <div class="tilt" onclick="showProject('project1')">
+      <h2 class="text-xl font-semibold mb-2">Project 1 - Premium Website</h2>
+      <p class="text-blue-200 mb-4">A clean website design explaining your favorite games.</p>
+      <span class="project-link">View Project →</span>
+    </div>
+
+    <div class="tilt" onclick="showProject('project2')">
+      <h2 class="text-xl font-semibold mb-2">Project 2 - Music Player App</h2>
+      <p class="text-blue-200 mb-4">Your coding project with animations and UI design.</p>
+      <span class="project-link">View Project →</span>
+    </div>
+
+    <div class="tilt" onclick="hideProjects()">
+      <h2 class="text-xl font-semibold mb-2">Close Project Details</h2>
+      <p class="text-blue-200 mb-4">Click here to close project details and return to portfolio.</p>
+      <span class="project-link">Back to Portfolio →</span>
+    </div>
+
+  </section>
+
+  <!-- Project Details -->
+  <section id="projectDetails" class="project-details hidden">
+
+    <div id="project1" class="hidden">
+      <h2 class="text-3xl font-bold mb-4">Premium Website Project</h2>
+      <p>This is a demo of a premium website design showcasing smooth animations, responsive layout, and modern UI built with Tailwind CSS.</p>
+      <ul class="list-disc list-inside mt-4">
+        <li>Responsive design for all screen sizes</li>
+        <li>Smooth hover animations and transitions</li>
+        <li>Clean typography with readable font sizes</li>
+        <li>Interactive project cards with 3D tilt effects</li>
+        <li>Easy navigation and contact details included</li>
+      </ul>
+      <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80" alt="Premium Website Preview" />
+    </div>
+
+    <div id="project2" class="hidden">
+      <h2 class="text-3xl font-bold mb-4">Music Player App</h2>
+      <p>A modern music player app concept featuring an intuitive interface, playlists, and seamless playback controls.</p>
+      <ul class="list-disc list-inside mt-4">
+        <li>User-friendly interface with sleek controls</li>
+        <li>Supports playlists, favorites, and search</li>
+        <li>Responsive design for mobile and desktop</li>
+        <li>Background playback and volume control</li>
+        <li>Clean and modern UI with Tailwind CSS styling</li>
+      </ul>
+      <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=800&q=80" alt="Music Player App Screenshot" />
+    </div>
+
+  </section>
+
+  <!-- Contact Footer -->
+  <footer>
+    <p>📞 +9779820802375 | 📧 pandeyusubhamn@gmail.com | 📧 yogendraupandey@gmail.com</p>
+  </footer>
+
+  <!-- JS for interactive name tilt and project toggle -->
+  <script>
+    const name = document.getElementById('tiltName');
+    const projectDetails = document.getElementById('projectDetails');
+    const project1 = document.getElementById('project1');
+    const project2 = document.getElementById('project2');
+
+    document.addEventListener('mousemove', (e) => {
+      const x = (e.clientX / window.innerWidth - 0.5) * 20;
+      const y = (e.clientY / window.innerHeight - 0.5) * -20;
+      name.style.transform = `rotateX(${y}deg) rotateY(${x}deg)`;
+    });
+
+    function showProject(id) {
+      projectDetails.classList.remove('hidden');
+      if (id === 'project1') {
+        project1.classList.remove('hidden');
+        project2.classList.add('hidden');
+      } else if (id === 'project2') {
+        project2.classList.remove('hidden');
+        project1.classList.add('hidden');
+      }
+      window.scrollTo({ top: projectDetails.offsetTop - 30, behavior: 'smooth' });
+    }
+
+    function hideProjects() {
+      projectDetails.classList.add('hidden');
+      project1.classList.add('hidden');
+      project2.classList.add('hidden');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  </script>
+
+</body>
+</html>
